@@ -5,21 +5,20 @@ import flixel.FlxSprite;
 import flixel.math.FlxPoint;
 import flixel.system.FlxSound;
 
+
 /**
  * ...
  * @author ...
  */
 class Ball extends FlxSprite
 {
-	static inline var SPEED:Float = 300;
-	static inline var WIDTH:Int = 640;
-	static inline var HEIGHT:Int = 480;
+	static inline var SPEED:Float = 300;	
 	static inline var MERGE:Int = 45;
 
-	var up:Bool = false;
-	var down:Bool = false;
-	var left:Bool = false;
-	var right:Bool = false;
+	public var up:Bool = false;
+	public var down:Bool = false;
+	public var left:Bool = false;
+	public var right:Bool = false;
 	var soundScreen :FlxSound;
 	public var isOff = false;
 
@@ -27,9 +26,10 @@ class Ball extends FlxSprite
 	{
 		super(X, Y);
 		loadGraphic(AssetPaths.bl__png, true);
-		right = true;
 		up = true;
-
+		isOff = true;
+		
+		
 		soundScreen = FlxG.sound.load(AssetPaths.boundaryCollision__wav);
 	}
 
@@ -39,14 +39,14 @@ class Ball extends FlxSprite
 		// Collision with the screen
 		if (this.y + this.graphic.height < MERGE)
 		{
-			if (this.x > WIDTH)   // Right, come back from the left
+			if (this.x > FlxG.width)   // Right, come back from the left
 			{
 				this.x = 0;
 			}
 		}
 		else
 		{
-			if (this.x + this.graphic.width > WIDTH)   // Right,
+			if (this.x + this.graphic.width > FlxG.width)   // Right,
 			{
 				right = false;
 				left = true;
@@ -67,10 +67,6 @@ class Ball extends FlxSprite
 			soundScreen.play();
 		}
 
-		/*if (up && down)
-				up = down = false;
-			if (left && right)
-				left = right = false; */
 
 		if (up)
 			velocity.y = -SPEED;
