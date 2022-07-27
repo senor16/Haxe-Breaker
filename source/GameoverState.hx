@@ -11,6 +11,7 @@ import flixel.FlxG;
  * @author ...
  */
 class GameoverState extends FlxState {
+	
 	var menuButton:FlxButton;
 	var titleText:FlxText;
 	var thanksText:FlxText;
